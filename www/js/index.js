@@ -62,6 +62,7 @@ $(document).on('deviceready', function() {
     var $loginStatus = $('#login p');
 
     $loginButton.on('click', function() {
+		
         googleapi.authorize({
             client_id: '95225454408-ouikghqqv3ggs7oggm1bgba8kesiqdm1.apps.googleusercontent.com',
             client_secret: 'b6bOdet6evoQe7ANsS16N8d5',

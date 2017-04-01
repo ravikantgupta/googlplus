@@ -7,6 +7,11 @@
     <author email="dev@callback.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
+	<plugin name="org.apache.cordova.console" spec="0.2.11"/>
+    	<plugin name="org.apache.cordova.device" spec="0.2.3" />
+    	
+    	
+		 <plugin name="org.apache.cordova.inappbrowser" spec="0.5.2"  />
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
