@@ -75,9 +75,9 @@ function callGoogle() {
 
     //  alert('starting');
     googleapi.authorize({
-        client_id: '163467203848-suhnp2q1kif2t7s19j5o436eirm6dvj0.apps.googleusercontent.com',
-        client_secret: 's6-xZG0BH3J4DQ0FR-I_VWDd',
-        redirect_uri: 'http://localhost',
+        client_id: '95225454408-ouikghqqv3ggs7oggm1bgba8kesiqdm1.apps.googleusercontent.com',
+        client_secret: 'b6bOdet6evoQe7ANsS16N8d5',
+        redirect_uri: 'https://www.googleapis.com/auth/analytics.readonly',
         scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
     }).done(function(data) {
         accessToken = data.access_token;
