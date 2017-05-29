@@ -10,7 +10,9 @@
 	<plugin name="org.apache.cordova.console" spec="0.2.11"/>
     	<plugin name="org.apache.cordova.device" spec="0.2.3" />
     	
-    	<plugin name="nl.x-services.plugins.googleplus" spec="1.0.7"  />
+    	<plugin name="cordova-plugin-googleplus" source="npm">
+  <param name="REVERSED_CLIENT_ID" value="95225454408-ouikghqqv3ggs7oggm1bgba8kesiqdm1.apps.googleusercontent.com" />
+</plugin>
 		 <plugin name="org.apache.cordova.inappbrowser" spec="0.5.2"  />
 		 
     <access origin="*" />
