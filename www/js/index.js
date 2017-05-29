@@ -64,8 +64,8 @@ $(document).on('deviceready', function() {
     $loginButton.on('click', function() {
 		
         googleapi.authorize({
-            client_id: '163467203848-9h6eko2b6bs5sn7f31ukm7afdaednnnd.apps.googleusercontent.com',
-            client_secret: 'AIzaSyAS20YRcWmJOOsfnTyXTEA0gLd2qHRdC3s',
+            client_id: '163467203848-suhnp2q1kif2t7s19j5o436eirm6dvj0.apps.googleusercontent.com',
+            client_secret: 's6-xZG0BH3J4DQ0FR-I_VWDd',
             redirect_uri: 'http://manage.staticking.net/index.php/pages/login',
             scope: 'https://www.googleapis.com/auth/analytics.readonly'
         }).done(function(data) {
