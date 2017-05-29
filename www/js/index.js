@@ -1,4 +1,3 @@
-
 $(document).on('deviceready', function() {
     var $loginButton = $('#login a');
     var $loginStatus = $('#login p');
