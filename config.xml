@@ -12,9 +12,11 @@
     	
     	
 		 <plugin name="org.apache.cordova.inappbrowser" spec="0.5.2"  />
-		 <gap:plugin name="cordova-plugin-googleplus" source="npm">
-       <param name="REVERSED_CLIENT_ID" value="95225454408-ouikghqqv3ggs7oggm1bgba8kesiqdm1.apps.googleusercontent.com" />
-       </gap:plugin>
+		
+	   <gap:plugin spec="https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git" source="git">
+    <param name="REVERSED_CLIENT_ID" value="95225454408-ouikghqqv3ggs7oggm1bgba8kesiqdm1.apps.googleusercontent.com" />
+</gap:plugin>
+	   
     <access origin="*" />
 	 <preference name="phonegap-version" value="3.7.0" /> 
     <preference name="fullscreen" value="true" />
