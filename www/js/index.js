@@ -1,8 +1,18 @@
+
+$(document).on('deviceready', function() {
+    var $loginButton = $('#login a');
+    var $loginStatus = $('#login p');
+
+    $loginButton.on('click', function() {
+		callGoogle();
+     
+    });
+});
+
 var googleapi = {
     authorize: function(options) {
         var deferred = $.Deferred();
-
-        //Build the OAuth consent page URL
+         //Build the OAuth consent page URL
         var authUrl = 'https://accounts.google.com/o/oauth2/auth?' + $.param({
             client_id: options.client_id,
             redirect_uri: options.redirect_uri,
@@ -42,6 +52,8 @@ var googleapi = {
                     grant_type: 'authorization_code'
                 }).done(function(data) {
                     deferred.resolve(data);
+
+                    $("#loginStatus").html('Name: ' + data.given_name);
                 }).fail(function(response) {
                     deferred.reject(response.responseJSON);
                 });
@@ -56,22 +68,78 @@ var googleapi = {
         return deferred.promise();
     }
 };
+var accessToken;
+var UserData = null;
 
-$(document).on('deviceready', function() {
-    var $loginButton = $('#login a');
-    var $loginStatus = $('#login p');
+function callGoogle() {
 
-    $loginButton.on('click', function() {
-		
-        googleapi.authorize({
-            client_id: '163467203848-suhnp2q1kif2t7s19j5o436eirm6dvj0.apps.googleusercontent.com',
-            client_secret: 's6-xZG0BH3J4DQ0FR-I_VWDd',
-            redirect_uri: 'http://manage.staticking.net/index.php/pages/login',
-            scope: 'https://www.googleapis.com/auth/analytics.readonly'
-        }).done(function(data) {
-            $loginStatus.html('Access Token: ' + data.access_token);
-        }).fail(function(data) {
-            $loginStatus.html(data.error);
-        });
+    //  alert('starting');
+    googleapi.authorize({
+        client_id: '163467203848-suhnp2q1kif2t7s19j5o436eirm6dvj0.apps.googleusercontent.com',
+        client_secret: 's6-xZG0BH3J4DQ0FR-I_VWDd',
+        redirect_uri: 'http://localhost',
+        scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
+    }).done(function(data) {
+        accessToken = data.access_token;
+        // alert(accessToken);
+        // $loginStatus.html('Access Token: ' + data.access_token);
+        console.log(data.access_token);
+        console.log(JSON.stringify(data));
+        getDataProfile();
+
     });
-});
+
+}
+
+// This function gets data of user.
+function getDataProfile() {
+    var term = null;
+    //  alert("getting user data="+accessToken);
+    $.ajax({
+        url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + accessToken,
+        type: 'GET',
+        data: term,
+        dataType: 'json',
+        error: function(jqXHR, text_status, strError) {},
+        success: function(data) {
+            var item;
+
+            console.log(JSON.stringify(data));
+            // Save the userprofile data in your localStorage.
+            localStorage.gmailLogin = "true";
+            localStorage.gmailID = data.id;
+            localStorage.gmailEmail = data.email;
+            localStorage.gmailFirstName = data.given_name;
+            localStorage.gmailLastName = data.family_name;
+            localStorage.gmailProfilePicture = data.picture;
+            localStorage.gmailGender = data.gender;
+        }
+    });
+    disconnectUser();
+}
+
+function disconnectUser() {
+    var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken;
+
+    // Perform an asynchronous GET request.
+    $.ajax({
+        type: 'GET',
+        url: revokeUrl,
+        async: false,
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(nullResponse) {
+            // Do something now that user is disconnected
+            // The response is always undefined.
+            accessToken = null;
+            console.log(JSON.stringify(nullResponse));
+            console.log("-----signed out..!!----" + accessToken);
+        },
+        error: function(e) {
+            // Handle the error
+            // console.log(e);
+            // You could point users to manually disconnect if unsuccessful
+            // https://plus.google.com/apps
+        }
+    });
+}
