@@ -13,7 +13,7 @@
     	   <preference name="android-build-tool" value="ant|gradle" />
 
     	<plugin name="cordova-plugin-googleplus" source="npm">
-  <param name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.952222804090-jbprurui519e3c3u3kvhaj96d5odppk0" />
+  <param name="REVERSED_CLIENT_ID" value="952222804090-hluo557fqcuv6j8kojaer66fj7plpgr8.apps.googleusercontent.com" />
 </plugin>
 		
 		 
